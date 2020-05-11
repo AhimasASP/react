@@ -431,6 +431,9 @@ module.exports = function(webpackEnv) {
               exclude: cssModuleRegex,
               use: getStyleLoaders({
                 importLoaders: 1,
+                modules: {
+                  localIdentName: '[name]__[local]__[hash:base64:5]'
+                },
                 sourceMap: isEnvProduction && shouldUseSourceMap,
               }),
               // Don't consider CSS imports dead code even if the
@@ -500,6 +503,14 @@ module.exports = function(webpackEnv) {
               options: {
                 name: 'static/media/[name].[hash:8].[ext]',
               },
+            },
+            {
+              test: /\.scss$/,
+              use: [
+                  require.resolve('style-loader'),
+                  require.resolve('css-loader'),
+                  require.resolve('sass-loader'),
+              ],
             },
             // ** STOP ** Are you adding a new loader?
             // Make sure to add the new loader(s) before the "file" loader.

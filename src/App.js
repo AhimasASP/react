@@ -1,18 +1,25 @@
 import React, {Component} from 'react';
-import './App.css';
+import './App.scss';
 import Car from './Car/Car.js'
 
 class App extends Component {
-  state = {
-    cars: [
-      {name: "Acura", year: 2000},
-      {name: "Ford", year: 2010},
-      {name: "Audi", yaer: 2015},
-      {name: "Peugeot", yaer: 2014}
-    ],
-    pageTitle : "React Components",
-    showCars: false
-  }
+
+    constructor(props) {
+        super(props)
+
+        console.log('App constructor')
+
+        this.state = {
+            cars: [
+                {name: "Acura", year: 2000},
+                {name: "Ford", year: 2010},
+                {name: "Audi", year: 2015},
+                {name: "Peugeot", year: 2014}
+            ],
+            pageTitle : "React Components",
+            showCars: false
+        }
+    }
 
 toggleCarHandler = (newTitle) => {
       this.setState({
@@ -34,7 +41,16 @@ deleteHandler(index) {
   this.setState({cars})
 }
 
-render() {
+componentWillMount() {
+        console.log('App componentWillMount')
+}
+
+componentDidMount() {
+        console.log('App componentDidMount')
+}
+
+    render() {
+        console.log('App render')
   const divStyle = {
     textAlign: 'center'
   }
@@ -55,8 +71,11 @@ render() {
   }
   return (
     <div style = {divStyle}>
-      <h1>{this.state.pageTitle}</h1>
-      <button onClick = {this.toggleCarHandler}>Toggle cars</button>
+      {/*<h1>{this.state.pageTitle}</h1>*/}
+      <h1>{this.props.title}</h1>
+      <button
+            className={'AppButton'}
+          onClick = {this.toggleCarHandler}>Toggle cars</button>
        <div style ={{
          width: 400,
          margin: 'auto',
